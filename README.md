@@ -6,7 +6,7 @@ A Genbank interface.
 
 In project.clj:
 
-[clj-genbank "0.1.2"]
+[clj-genbank "0.1.3"]
 
 To search pubmed use `e-search`:
 
@@ -54,8 +54,7 @@ clj-genbank.core> (with-open [r (genbank-connection (e-search "cyclotide" "nucle
                          (take 3)
                          (mapcat features)
                          (filter #(= (feature-key %) "CDS"))
-                         (mapcat qualifiers)
-                         (mapv qualifier-protein-id)))
+                         (mapv feature-protein-id)))
 ["ASR19270.1"]
 clj-genbank.core>
 ```

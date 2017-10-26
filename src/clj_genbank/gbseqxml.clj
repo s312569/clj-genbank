@@ -48,29 +48,26 @@
   [fz]
   (xzip/xml1-> fz :GBFeature_location xzip/text))
 
-;; qualifiers
-
-(defn qualifiers
-  "Returns a collection of qualifier zippers from a feature zipper."
+(defn feature-gene
+  "Returns the gene name from a feature zipper."
   [fz]
-  (xzip/xml-> fz :GBFeature_quals))
+  (xzip/xml1-> fz :GBFeature_quals :GBQualifier [:GBQualifier_name "gene"]
+               :GBQualifier_value xzip/text))
 
-(defn qualifier-gene
-  "Returns the gene name from a qualifier zipper."
-  [qz]
-  (xzip/xml1-> qz :GBQualifier [:GBQualifier_name "gene"] :GBQualifier_value xzip/text))
+(defn feature-protein-id
+  "Returns the protein id from a feature zipper."
+  [fz]
+  (xzip/xml1-> fz :GBFeature_quals :GBQualifier [:GBQualifier_name "protein_id"]
+               :GBQualifier_value xzip/text))
 
-(defn qualifier-protein-id
-  "Returns the protein id from a qualifier zipper."
-  [qz]
-  (xzip/xml1-> qz :GBQualifier [:GBQualifier_name "protein_id"] :GBQualifier_value xzip/text))
+(defn feature-translation
+  "Returns a protein translation from a feature zipper."
+  [fz]
+  (xzip/xml1-> fz :GBFeature_quals :GBQualifier [:GBQualifier_name "translation"]
+               :GBQualifier_value xzip/text))
 
-(defn qualifier-translation
-  "Returns a protein translation from a qualifier zipper."
-  [qz]
-  (xzip/xml1-> qz :GBQualifier [:GBQualifier_name "translation"] :GBQualifier_value xzip/text))
-
-(defn qualifier-product
-  "Returns the product of a qualifier zipper."
-  [qz]
-  (xzip/xml1-> qz :GBQualifier [:GBQualifier_name "product"] :GBQualifier_value xzip/text))
+(defn feature-product
+  "Returns the product of a feature zipper."
+  [fz]
+  (xzip/xml1-> fz :GBFeature_quals :GBQualifier [:GBQualifier_name "product"]
+               :GBQualifier_value xzip/text))
