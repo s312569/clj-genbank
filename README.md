@@ -6,7 +6,7 @@ A Genbank interface.
 
 In project.clj:
 
-[clj-genbank "0.1.1"]
+[clj-genbank "0.1.2"]
 
 To search pubmed use `e-search`:
 

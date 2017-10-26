@@ -23,6 +23,10 @@
   [gbz]
   (xzip/xml1-> gbz :GBSeq_locus xzip/text))
 
+(defn primary-accession
+  [gbz]
+  (xzip/xml1-> gbz :GBSeq_primary-accession xzip/text))
+
 (defn definition
   [gbz]
   (xzip/xml1-> gbz :GBSeq_definition xzip/text))
@@ -30,7 +34,7 @@
 ;; features
 
 (defn features
-  "Returns a list of feature zippers."
+  "Returns a collection of feature zippers."
   [gbz]
   (xzip/xml-> gbz :GBSeq_feature-table :GBFeature))
 
@@ -47,7 +51,7 @@
 ;; qualifiers
 
 (defn qualifiers
-  "Returns a list of qualifier zippers from a feature zipper."
+  "Returns a collection of qualifier zippers from a feature zipper."
   [fz]
   (xzip/xml-> fz :GBFeature_quals))
 
@@ -65,3 +69,8 @@
   "Returns a protein translation from a qualifier zipper."
   [qz]
   (xzip/xml1-> qz :GBQualifier [:GBQualifier_name "translation"] :GBQualifier_value xzip/text))
+
+(defn qualifier-product
+  "Returns the product of a qualifier zipper."
+  [qz]
+  (xzip/xml1-> qz :GBQualifier [:GBQualifier_name "product"] :GBQualifier_value xzip/text))

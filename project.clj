@@ -1,4 +1,4 @@
-(defproject clj-genbank "0.1.1"
+(defproject clj-genbank "0.1.2"
   :description "An interface to GenBank."
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
