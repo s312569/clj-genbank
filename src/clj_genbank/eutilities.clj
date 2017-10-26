@@ -44,11 +44,11 @@
   ([term db] (e-search term db 0 nil))
   ([term db restart key]
      (let [r (search-url term db restart key)
-           k (xml1-> (xml-zip r) :WebEnv text)
-           c (Integer/parseInt (xml1-> (xml-zip r) :Count text))]
+           k (xzip/xml1-> (zip/xml-zip r) :WebEnv xzip/text)
+           c (Integer/parseInt (xzip/xml1-> (zip/xml-zip r) :Count xzip/text))]
        (if (> restart c)
          nil
-         (lazy-cat (xml-> (xml-zip r) :IdList :Id text)
+         (lazy-cat (xzip/xml-> (zip/xml-zip r) :IdList :Id xzip/text)
                    (e-search term db (+ restart 1000) k))))))
 
 (defn genbank-connection
@@ -80,8 +80,8 @@
                             {:query-params (merge {:dbfrom (name idb)
                                                    :db (name tdb)
                                                    :id acc})})))
-        p (xml-> (xml-zip x) :LinkSet :LinkSetDb)]
+        p (xzip/xml-> (zip/xml-zip x) :LinkSet :LinkSetDb)]
     (into {}
-          (map #(vector (xml1-> % :LinkName text)
-                        (xml-> % :Link :Id text))
+          (map #(vector (xzip/xml1-> % :LinkName xzip/text)
+                        (xzip/xml-> % :Link :Id xzip/text))
                p))))

@@ -6,7 +6,7 @@ A Genbank interface.
 
 In project.clj:
 
-[clj-fasta "0.2.3"]
+[clj-genbank "0.1.1"]
 
 To search pubmed use `e-search`:
 
